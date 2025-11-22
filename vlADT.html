@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Reza</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .box {
+        background: white;
+        padding: 20px;
+        border-radius: 20px;
+        max-width: 420px;
+        margin: auto;
+        box-shadow: 0 0 12px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+        margin-top: 0;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 15px;
+        border-collapse: collapse;
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    table td {
+        padding: 14px;
+        border-bottom: 1px solid #ddd;
+        font-size: 16px;
+    }
+
+    button {
+        margin-top: 18px;
+        padding: 13px;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 17px;
+        width: 100%;
+        font-weight: bold;
+    }
+
+    #mulaiBtn { background: #007bff; }
+    #mulaiBtn:hover { background: #005fcc; }
+
+    #waBtn { background: #25D366; }
+    #waBtn:hover { background: #1eb95d; }
+
+    #teleBtn { background: #0088cc; }
+    #teleBtn:hover { background: #0071a8; }
+
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Selamat Datang!</h2>
+    <p>Selamat datang di website milik <b>Reza</b>, anda bisa mencari aplikasi Pro hanya disini saja.</p>
+
+    <table>
+        <tr><td>• Aplikasi Premium</td></tr>
+        <tr><td>• Unband WhatsApp</td></tr>
+        <tr><td>• mods games</td></tr>
+    </table>
+
+    <button id="mulaiBtn">MULAI</button>
+
+    <!-- Tabel WhatsApp -->
+    <table style="margin-top: 25px;">
+        <tr><td>• Hubungi WhatsApp</td></tr>
+    </table>
+
+    <button id="waBtn">HUBUNGI</button>
+
+    <!-- Tabel Telegram -->
+    <table style="margin-top: 25px;">
+        <tr><td>• Hubungi Telegram</td></tr>
+    </table>
+
+    <button id="teleBtn">HUBUNGI TELEGRAM</button>
+</div>
+
+<script>
+    // Tombol menuju halaman selanjutnya
+    document.getElementById("mulaiBtn").onclick = function () {
+        window.location.href = "https://files.clugx.my.id/G4I35.html";
+    };
+
+    // Tombol WA
+    document.getElementById("waBtn").onclick = function () {
+        window.location.href = "https://wa.me/6287899441906";
+    };
+
+    // Tombol Telegram
+    document.getElementById("teleBtn").onclick = function () {
+        window.location.href = "https://t.me/+6283116920767";
+    };
+</script>
+
+</body>
+</html>
