@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAYMENT Oct4 </title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    body {
+      background: url('https://files.catbox.moe/cs5h8t.jpg') no-repeat center center fixed;
+      // 𝗦𝗘𝗧𝗧𝗜𝗡𝗚 𝗙𝗢𝗧𝗢 𝗕𝗔𝗖𝗞𝗚𝗥𝗢𝗨𝗡𝗗 𝗗𝗜 𝗔𝗧𝗔𝗦 𝗦𝗜𝗡
+      background-size: cover;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      overflow-x: hidden;
+    }
+    
+    .welcome-message {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 1);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+      z-index: 9999;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 5; }
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #cbd5e1;
+      animation: fadeInUp 1s ease-in-out;
+    }
+    
+    .qr img {
+      width: 220px;
+      border-radius: 12px;
+      margin: 30px auto;
+      transition: transform 0.3s ease;
+    }
+
+    .qr:hover img { transform: scale(1.08); }
+    
+    .show-btn {
+  color: #00ff99;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 5px;
+  display: inline-block;
+  }
+
+    .qr-img {
+  display: none;
+  margin-top: 10px;
+  transition: opacity 0.3s ease;
+  }
+
+   .qr-img img {
+  width: 200px;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  }
+
+   .qr-img img:hover {
+  transform: scale(1.1);
+  }
+
+   .qr-img.show {
+  display: block;
+    }
+    
+    .payment-item {
+      background-color: #111;
+      border: 1px solid white;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: left;
+      position: relative;
+    }
+
+    .payment-item span {
+      display: block;
+      font-size: 1rem;
+      margin-top: 5px;
+      color: #aaa;
+    }
+    .glitch {
+      font-size: 30px;
+      color: white;
+      position: relative;
+      display: inline-block;
+      animation: glitch 1s infinite;
+    }
+
+    @keyframes glitch {
+      0% {text-shadow: 2px 2px red;}
+      20% {text-shadow: -2px -2px cyan;}
+      40% {text-shadow: 2px -2px lime;}
+      60% {text-shadow: -2px 2px yellow;}
+      80% {text-shadow: 2px 0px magenta;}
+      100% {text-shadow: 0px 2px blue;}
+    }
+
+    .pay-section {
+      margin-top: 40px;
+    }
+
+    .pay-box {
+      background-color: #111;
+      border: 2px solid white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px white;
+    }
+
+    .pay-title {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .pay-number {
+      font-size: 20px;
+      background-color: #222;
+      padding: 10px;
+      border-radius: 8px;
+      word-break: break-all;
+      
+    .pay-xxx {
+      font-size: 40px;
+      background-color: #222;
+      padding: 10px;
+      border-radius: 8px;
+      word-break: break-all;
+    }
+
+    .btn-copy {
+      margin-top: 10px;
+      background-color: white;
+      color: black;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-copy:hover {
+      background-color: white;
+      color: black;
+    }
+    
+    #clock {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      
+    }
+
+    .marquee {
+      margin-top: 30px;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 10s linear infinite;
+      color: red;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="welcome-message" class="welcome-message">
+  <h1>Hai, Saya OCT4 SI GANTENG</h1>
+  <p>Selamat Datang Di Website Payment.</p>
+  <button id="go-to-payment" class="btn-copy" onclick="startApp()">Payment</button>
+</div>
+
+  <h1 class="glitch">PAYMENT OCT4</h1><br>
+    <div class="glitch" id="clock">00:00:00</div>
+  
+<div class="pay-box" id="qr-section">
+      <div class="pay-title">QRIS</div>
+<div class="qr">
+    <img src="https://files.catbox.moe/g35kwv.jpg" />
+  </div>
+  
+  <div class="pay-xxx" id="qr-section">
+      <div class="pay-title">RULES</div>
+  <div class="qr">
+    <img src="https://files.catbox.moe/x0l17w.jpg" />
+  </div>
+
+
+  <div class="pay-section">
+    <div class="pay-box">
+      <div class="pay-title">DANA</div>
+      <div class="pay-number" id="dana">083193921054</div>
+      <button class="btn-copy" onclick="copyText('dana')">SALIN</button>
+    </div>
+
+    <div class="pay-box">
+      <div class="pay-title">GOPAY</div>
+      <div class="pay-number" id="gopay">LOM ADA</div>
+      <button class="btn-copy" onclick="copyText('gopay')">SALIN</button>
+    </div>
+  </div>
+  
+  <div class="pay-box">
+      <div class="pay-title">OVO</div>
+      <div class="pay-number" id="ovo">LOM ADA</div>
+      <button class="btn-copy" onclick="copyText('ovo')">SALIN</button>
+    </div>
+  </div>
+  
+  <div class="show-btn">
+      <a class="btn-copy" href="https://wa.me/6283873046493" class="pay-title">WhatsApp</a>
+      <a class="btn-copy" href="https://t.me/telelu" class="pay-title">Telegram</a><br><br><br>
+      <a href="index.html" class="btn-copy">Kembali</a>
+    </div>
+  </div>
+
+  <div class="marquee">
+    <span>SETELAH MELAKUKAN PEMBAYARAN HARAP KONFIRMASI VIA WHATSAPP!</span>
+  </div>
+
+  <!-- 🔊 Audio -->
+  <audio id="bg-music" loop>
+    <source src="https://o.uguu.se/GZOGWpoG.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <script>
+  // Jam digital
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('id-ID', { hour12: false });
+      document.getElementById('clock').textContent = time;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  
+  function startApp() {
+      document.getElementById('welcome-message').style.display = 'none';
+      const audio = document.getElementById('bg-music');
+      audio.play()
+    }
+    
+  // Tampilkan QR saat diklik
+    function toggleQR() {
+  const qr = document.getElementById('qr-img');
+  qr.classList.toggle('show');
+    }
+  
+    function copyText(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Berhasil disalin: " + text);
+      });
+    }
+  </script>
+
+</body>
+</html>
