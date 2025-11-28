@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>King Secret — Login + Dashboard</title>
+<style>
+  body{margin:0;background:#071629;font-family:'Courier New',monospace;color:#fff}
+  .page{display:none}
+  .active{display:block}
+  .container{width:90%;max-width:380px;margin:60px auto;background:rgba(255,255,255,0.05);padding:28px;border-radius:18px;box-shadow:0 0 20px rgba(0,0,0,0.4);text-align:center}
+  input{width:100%;padding:12px;border-radius:10px;border:none;background:rgba(255,255,255,0.1);color:white;margin-bottom:14px;font-size:15px}
+  button{width:100%;padding:14px;border:none;border-radius:12px;font-size:17px;background:linear-gradient(90deg,#1a73e8,#1976ff);color:#fff;cursor:pointer;margin-top:8px}
+  .menu{margin-top:25px}
+  .menu-item{background:rgba(255,255,255,0.1);padding:16px;border-radius:12px;margin-bottom:14px;font-size:18px;cursor:pointer;text-align:center}
+  .menu-item:hover{background:rgba(77,168,255,0.25)}
+  a.menu-item{text-decoration:none;color:white;display:block}
+</style>
+</head>
+<body><!-- LOGIN PAGE --><div id="loginPage" class="page active">
+  <div class="container">
+    <h1>King Secret</h1>
+    <p style="opacity:.7;margin-top:-5px;margin-bottom:22px">Sign in to continue</p><input id="user" type="text" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+
+<button onclick="login()">Sign In</button>
+
+<p style="margin-top:16px;font-size:14px">Need an account? 
+  <a href="https://wa.me/6287860110528" target="_blank" style="color:#4da8ff;font-weight:bold;text-decoration:none">Contact Admin</a>
+</p>
+
+  </div>
+</div><!-- DASHBOARD PAGE --><div id="dashboardPage" class="page">
+  <div class="container">
+    <h2>Dashboard</h2>
+    <div class="menu">
+      <div class="menu-item">Menu Suntik</div>
+      <a class="menu-item" href="https://faq.whatsapp.com/465883178708358/?locale=id_ID" target="_blank">Suntik unband wa</a>
+      <div class="menu-item">Konfirmasi</div>
+    </div>
+  </div>
+</div><script>
+  function login(){
+    const u = document.getElementById('user').value.trim();
+    const p = document.getElementById('pass').value.trim();
+    if(u === "Vicky" && p === "123"){
+      document.getElementById('loginPage').classList.remove('active');
+      document.getElementById('dashboardPage').classList.add('active');
+    } else {
+      alert("Username atau Password salah!");
+    }
+  }
+</script></body>
+</html>
