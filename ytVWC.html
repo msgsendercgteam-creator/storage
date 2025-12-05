@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Hacking Cepat & Persisten</title>
+    <!-- Memuat Tailwind CSS untuk styling modern dan responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Tailwind untuk font Monospace dan warna kustom -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hacker-green': '#00ff41',
+                        'dark-bg': '#0a0a0a',
+                    },
+                    fontFamily: {
+                        mono: ['Consolas', 'Monaco', 'Lucida Console', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Gaya kustom untuk tampilan terminal yang imersif */
+        body, html {
+            height: 100%;
+            overflow: hidden; 
+            margin: 0;
+            padding: 0;
+        }
+        #terminal {
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.6); 
+            line-height: 1.5;
+            white-space: pre-wrap; 
+            overflow-y: scroll;
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        #terminal::-webkit-scrollbar { 
+            display: none;
+        }
+        .blinking-cursor {
+            opacity: 1;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-hacker-green font-mono">
+
+    <!-- Kontainer utama terminal -->
+    <div id="terminal" class="p-4 md:p-8 h-screen w-full text-xs md:text-sm lg:text-base">
+        <!-- Output akan dimasukkan di sini oleh JavaScript -->
+        <span id="output"></span>
+        <!-- Cursor yang berkedip di akhir output -->
+        <span id="cursor" class="blinking-cursor">_</span>
+    </div>
+
+    <!-- Tombol RESET SESI Dihapus, fungsi hanya dijalankan secara otomatis -->
+
+    <script>
+        const outputElement = document.getElementById('output');
+        const terminalElement = document.getElementById('terminal');
+        const cursorElement = document.getElementById('cursor');
+
+        // Peningkatan Kecepatan: Waktu tunggu per karakter DITURUNKAN
+        const TYPING_SPEED = 5;  // Sangat Cepat (sebelumnya 10)
+        const FAST_SPEED = 1;    // Kecepatan Data Dump (sebelumnya 2)
+        const LINE_DELAY = 50;   // Jeda antar baris dikurangi (sebelumnya 100)
+        const CYCLE_DELAY = 3000; // Jeda antar siklus peretasan dikurangi (sebelumnya 5000)
+
+        const STORAGE_KEY = 'hacker_session_active';
+
+        // --- SKRIP SIMULASI (Diperbarui dengan variabel yang lebih acak) ---
+        function generateScript() {
+            const targetIP = `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
+            const exploit = ['XSS-Vector', 'Buffer-Overflow', 'Zero-Day-Exploit', 'RCE-Payload'][Math.floor(Math.random() * 4)];
+            const port = [21, 23, 8080, 5432, 27017][Math.floor(Math.random() * 5)];
+            const filename = ['user_credentials.db', 'server_logs_Q4.zip', 'financial_data.tar.gz'][Math.floor(Math.random() * 3)];
+            const fileSize = (Math.random() * 5 + 1).toFixed(2); 
+
+            return [
+                // Fase 1: Koneksi dan Pengintaian
+                { text: `\n\nStarting new cycle: Target Acquisition at ${new Date().toLocaleTimeString('id-ID')}`, speed: TYPING_SPEED * 2 },
+                { text: `Attempting stealth scan on target: ${targetIP}`, speed: TYPING_SPEED },
+                { text: `nmap -sS -p- ${targetIP}`, speed: TYPING_SPEED },
+                { text: "[STATUS] Host is up. Latency: 21ms. OS: Linux Kernel 5.x (Debian)", speed: TYPING_SPEED },
+                { text: `[INFO] Found unusual open port: ${port}/tcp. Attempting service enumeration...`, speed: TYPING_SPEED * 1.5 },
+                { text: `Port ${port}/tcp: Open (${port === 8080 ? 'WebLogic' : port === 5432 ? 'PostgreSQL' : 'Unknown'})`, speed: FAST_SPEED },
+                
+                // Fase 2: Eksploitasi
+                { text: `[EXPLOIT] Preparing payload: '${exploit}' on Port ${port}...`, speed: TYPING_SPEED * 2 },
+                { text: "Payload injection initiated (5 stages)...", speed: TYPING_SPEED },
+                { text: "Stage 1/5: Encryption layer bypass...", speed: FAST_SPEED * 5 },
+                { text: "Stage 2/5: Memory allocation check...", speed: FAST_SPEED * 5 },
+                { text: "[!! ALERT !!] Failed checksum validation. Retrying with obfuscation...", speed: TYPING_SPEED * 3 },
+                { text: "Stage 3/5: Dynamic instruction generation...", speed: TYPING_SPEED },
+                { text: "\n[SUCCESS] Shell access acquired! Privilege Level: USER. Upgrading...", speed: TYPING_SPEED * 4 },
+                { text: "Executing 'sudo -u root' injection via CVE-2023-XXXX...", speed: TYPING_SPEED * 2 },
+                { text: "[SUCCESS] Root access granted. Target environment compromised.", speed: TYPING_SPEED * 4 },
+
+                // Fase 3: Transfer Data (dengan progress bar dinamis)
+                { text: `get /srv/secrets/${filename}`, speed: TYPING_SPEED },
+                { text: `[TRANSFER] Initiating data exfiltration (${fileSize} GB)...`, speed: TYPING_SPEED },
+                { text: createProgressText(fileSize), speed: 0, delay: 1000 }, 
+                { text: "\n[DATA DUMP] First 5 lines of encrypted AES data:", speed: TYPING_SPEED },
+                { text: createHexDump(5), speed: FAST_SPEED },
+                { text: "\n[STATUS] Data transfer complete. Integrity Check: OK.", speed: TYPING_SPEED * 3 },
+                
+                // Fase 4: Pembersihan dan Keluar
+                { text: "Wiping session artifacts and modifying server timestamps...", speed: TYPING_SPEED },
+                { text: "touch -c -t 202001010000.00 /var/log/*", speed: TYPING_SPEED },
+                { text: "logout", speed: TYPING_SPEED },
+                { text: `[LOG] Disconnected. Session closed. Preparing for next cycle...`, speed: TYPING_SPEED * 3 },
+                { text: `--------------------------------------------------`, speed: FAST_SPEED },
+            ];
+        }
+
+        // Fungsi bantu (autoScroll, createHexDump, createProgressText) tetap sama
+        
+        function autoScroll() {
+            terminalElement.scrollTop = terminalElement.scrollHeight;
+        }
+
+        function createHexDump(lines) {
+            let hexDump = '';
+            for (let i = 0; i < lines; i++) {
+                let addr = (Math.floor(Math.random() * 0xFFFFFFF) * 16).toString(16).padStart(8, '0').toUpperCase();
+                let hex = Array.from({ length: 16 }, () => Math.floor(Math.random() * 256).toString(16).padStart(2, '0')).join('');
+                let ascii = hex.match(/.{2}/g).map(h => String.fromCharCode(parseInt(h, 16))).join('').replace(/[^a-zA-Z0-9]/g, '.');
+                hexDump += `${addr}   ${hex.match(/.{4}/g).join(' ')}   |${ascii}|\n`;
+            }
+            return hexDump.trim();
+        }
+
+        function createProgressText(fileSize) {
+            return new Promise(resolve => {
+                let progress = 0;
+                const updateInterval = 30; // Update lebih cepat (sebelumnya 50)
+                
+                const interval = setInterval(() => {
+                    progress += Math.floor(Math.random() * 8) + 1; // Peningkatan lebih besar
+
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                    }
+                    
+                    const barLength = 50;
+                    const filled = Math.floor(progress / 100 * barLength);
+                    const empty = barLength - filled;
+                    const bar = `[${'#'.repeat(filled)}${'-'.repeat(empty)}] ${progress.toString().padStart(3, ' ')}% - ${fileSize} GB`;
+                    
+                    const currentText = outputElement.innerHTML;
+                    const lastNewLineIndex = currentText.lastIndexOf('\n');
+                    
+                    if (progress === 1) {
+                         outputElement.innerHTML += bar;
+                    } else if (lastNewLineIndex !== -1) {
+                        const previousLines = currentText.substring(0, lastNewLineIndex + 1);
+                        outputElement.innerHTML = previousLines + bar;
+                    } else {
+                        outputElement.innerHTML = bar;
+                    }
+
+                    autoScroll();
+
+                    if (progress === 100) {
+                        const finalContent = outputElement.innerHTML;
+                        const lastBarIndex = finalContent.lastIndexOf('[');
+                        outputElement.innerHTML = finalContent.substring(0, lastBarIndex).trim() + '\n';
+                        resolve(); 
+                    }
+                }, updateInterval);
+            });
+        }
+
+        function typeLine(text, speed) {
+            return new Promise(resolve => {
+                let charIndex = 0;
+                const interval = setInterval(() => {
+                    if (charIndex < text.length) {
+                        outputElement.textContent += text.charAt(charIndex);
+                        charIndex++;
+                        autoScroll();
+                    } else {
+                        clearInterval(interval);
+                        outputElement.textContent += '\n'; 
+                        resolve();
+                    }
+                }, speed);
+            });
+        }
+
+        async function executeScriptCycle(script) {
+            for (let i = 0; i < script.length; i++) {
+                const line = script[i];
+                
+                if (typeof line.text === 'function') {
+                    await line.text(line.fileSize);
+                } else {
+                    await typeLine(line.text, line.speed);
+                }
+                
+                if (i < script.length - 1) {
+                    await new Promise(resolve => setTimeout(resolve, line.delay || LINE_DELAY));
+                }
+            }
+        }
+
+        async function runScriptLoop() {
+            // Hilangkan kursor saat proses berjalan
+            cursorElement.style.display = 'none'; 
+
+            // Set status sesi aktif (tetap disimpan agar setelah refresh langsung melanjutkan)
+            localStorage.setItem(STORAGE_KEY, 'active');
+
+            // --- Mulai Perulangan Tak Terbatas ---
+            while (true) {
+                const script = generateScript();
+                await executeScriptCycle(script);
+                
+                // Jeda antara siklus
+                await new Promise(resolve => setTimeout(resolve, CYCLE_DELAY));
+            }
+        }
+        
+        // Mulai simulasi saat halaman dimuat
+        window.onload = () => {
+             // Tampilkan pesan awal hanya jika ini adalah sesi pertama
+            if (!localStorage.getItem(STORAGE_KEY)) {
+                outputElement.textContent = "Initializing secure shell environment...\n";
+                // Beri sedikit waktu untuk kesan "booting"
+                setTimeout(runScriptLoop, 1000); 
+            } else {
+                // Jika sudah ada status di localStorage (setelah refresh), langsung mulai looping
+                outputElement.textContent = `RESUMING SESSION (PERSISTENT) at ${new Date().toLocaleTimeString('id-ID')}...\n`;
+                // Langsung mulai dengan jeda yang sangat singkat
+                setTimeout(runScriptLoop, 300);
+            }
+        };
+
+    </script>
+</body>
+</html>
+
